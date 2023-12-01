@@ -28,6 +28,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     });
 
     Route::controller(AuthController::class)->group(function () {
-        Route::get('login', 'login')->name('auth.login');
+        Route::name('auth.')->group(function () {
+            Route::match(['get', 'post'], 'login', 'login')->name('login');
+            Route::post('logout', 'logout')->name('logout');
+        });
+       
     });
 });
