@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AuthController extends Controller
 {
-    public function index()
+    public function login()
     {
-        return view('admin.dashboard');
+        return view('admin.login');
     }
 }
