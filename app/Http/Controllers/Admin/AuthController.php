@@ -45,6 +45,6 @@ class AuthController extends Controller
         $data = $request->validated();
 
         Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
-        return back();
+        return back()->with('success_message', 'Cập nhật mật khẩu thành công!');;
     }
 }

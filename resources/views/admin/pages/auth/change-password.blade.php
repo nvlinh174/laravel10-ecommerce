@@ -11,6 +11,24 @@
                         <h3 class="card-title">Cập nhật mật khẩu</h3>
                     </div>
                     <div class="card-body">
+                        @if (session('success_message'))
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                <div class="d-flex">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
+                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M5 12l5 5l10 -10"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        {{ session('success_message') }}
+                                    </div>
+                                </div>
+                                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                            </div>
+                        @endif
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" disabled
@@ -61,7 +79,9 @@
                         <div class="mb-3">
                             <label class="form-label required">Nhập lại mật khẩu mới</label>
                             <div class="input-icon input-password">
-                                <input type="password" class="form-control @error('new_password_confirmation') is-invalid @enderror" name="new_password_confirmation">
+                                <input type="password"
+                                    class="form-control @error('new_password_confirmation') is-invalid @enderror"
+                                    name="new_password_confirmation">
                                 @error('new_password_confirmation')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
