@@ -8,11 +8,15 @@ use App\Http\Requests\Admin\Auth\UpdateProfileRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AuthController extends Controller
 {
     protected $viewPrefix = 'admin.pages.auth.';
+    protected $imagePath = 'images/admins/';
 
     public function login(Request $request)
     {
@@ -60,6 +64,26 @@ class AuthController extends Controller
     public function updateProfile(UpdateProfileRequest $request)
     {
         $data = $request->validated();
+        $currentImage = $request->current_image;
+
+        if ($request->hasFile('image')) {
+            $imageTmp = $request->file('image');
+            if ($imageTmp->isValid()) {
+                $extension = $imageTmp->getClientOriginalExtension();
+                $imageName = Str::random() . '.' . $extension;
+                $imagePath = $this->imagePath . $imageName;
+                Image::make($imageTmp)->save($imagePath);
+                $data['image'] = $imageName;
+
+                $currentImagePath = public_path("images/admins/{$currentImage}");
+                if (File::exists($currentImagePath)) File::delete($currentImagePath);
+            }
+        } else if ($currentImage) {
+            $data['image'] = $currentImage;
+        } else {
+            $data['image'] = "";
+        }
+
         Admin::where('id', Auth::guard('admin')->user()->id)->update($data);
         return back()->with('success_message', 'Cập nhật thông tin thành công!');
     }

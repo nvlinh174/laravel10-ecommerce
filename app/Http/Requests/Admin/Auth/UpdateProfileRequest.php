@@ -24,6 +24,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name' => 'max:255',
             'phone' => 'max:255',
+            'image' => $this->image ? 'image' : ''
         ];
     }
 
@@ -32,6 +33,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'name' => 'Họ tên',
             'phone' => 'Số điện thoại',
+            'image' => 'Avatar'
         ];
     }
 
@@ -39,6 +41,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'max' => ':attribute tối đa :max ký tự',
+            'image' => 'Không phải định dạng hình ảnh'
         ];
     }
 }

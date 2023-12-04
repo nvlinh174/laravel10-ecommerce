@@ -3,7 +3,7 @@
 @section('content')
     <div class="row row-cards">
         <div class="col-lg-6">
-            <form action="{{ route('admin.auth.updateProfile') }}" method="POST">
+            <form action="{{ route('admin.auth.updateProfile') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-status-top bg-dark"></div>
@@ -46,6 +46,19 @@
                             <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
                                 value="{{ $user->phone }}">
                             @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Avatar</label>
+                            @empty(!$user->image)
+                                <img width="150" class="rounded mb-2" src="/images/admins/{{ $user->image }}"
+                                    alt="avatar">
+                                <input type="hidden" value="{{ $user->image }}" name="current_image">
+                            @endempty
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"
+                                value="{{ $user->phone }}">
+                            @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
