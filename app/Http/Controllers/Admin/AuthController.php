@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\UpdatePasswordRequest;
+use App\Http\Requests\Admin\Auth\UpdateProfileRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ class AuthController extends Controller
             }
         }
 
+        if (Auth::guard('admin')->check()) return redirect('/admin/dashboard');
+
         return view('admin.login');
     }
 
@@ -45,6 +48,19 @@ class AuthController extends Controller
         $data = $request->validated();
 
         Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
-        return back()->with('success_message', 'Cập nhật mật khẩu thành công!');;
+        return back()->with('success_message', 'Cập nhật mật khẩu thành công!');
+    }
+
+    public function profile()
+    {
+        $user = Auth::guard('admin')->user();
+        return view("{$this->viewPrefix}profile", compact('user'));
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $data = $request->validated();
+        Admin::where('id', Auth::guard('admin')->user()->id)->update($data);
+        return back()->with('success_message', 'Cập nhật thông tin thành công!');
     }
 }

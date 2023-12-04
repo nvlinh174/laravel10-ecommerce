@@ -234,6 +234,9 @@
                         </span>
                     </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('admin.auth.profile') }}" rel="noopener">
+                            Thông tin cá nhân
+                        </a>
                         <a class="dropdown-item" href="{{ route('admin.auth.updatePassword') }}" rel="noopener">
                             Thay đổi mật khẩu
                         </a>

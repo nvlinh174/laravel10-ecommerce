@@ -31,6 +31,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
                 Route::post('logout', 'logout')->name('logout');
                 Route::get('update-password', 'updatePassword')->name('updatePassword');
                 Route::post('post-update-password', 'postUpdatePassword')->name('postUpdatePassword');
+                Route::get('profile', 'profile')->name('profile');
+                Route::post('update-profile', 'updateProfile')->name('updateProfile');
                 // Route::match(['get', 'post'], 'update-password', 'updatePassword')->name('updatePassword');
             });
         });

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePasswordRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,27 +22,23 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|current_password:admin',
-            'new_password' => 'required|confirmed',
-            'new_password_confirmation' => 'required'
+            'name' => 'max:255',
+            'phone' => 'max:255',
         ];
     }
 
     public function attributes()
     {
         return [
-            'password' => 'Mật khẩu cũ',
-            'new_password' => 'Mật khẩu mới',
-            'new_password_confirmation' => 'Xác nhận mật khẩu mới',
+            'name' => 'Họ tên',
+            'phone' => 'Số điện thoại',
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => ':attribute bắt buộc nhập',
-            'current_password' => ':attribute không đúng',
-            'confirmed' => ':attribute và xác nhận :attribute không trùng khớp'
+            'max' => ':attribute tối đa :max ký tự',
         ];
     }
 }
