@@ -199,71 +199,64 @@
         </div>
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="./">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dashboard"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                                <path d="M13.45 11.55l2.05 -2.05" />
-                                <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Dashboard
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
-                        data-bs-auto-close="false" role="button" aria-expanded="false">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Tài khoản
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('admin.auth.profile') }}" rel="noopener">
-                            Thông tin cá nhân
-                        </a>
-                        <a class="dropdown-item" href="{{ route('admin.auth.updatePassword') }}" rel="noopener">
-                            Thay đổi mật khẩu
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"
-                        onclick="document.getElementById('logoutForm').submit()">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                                <path d="M9 12h12l-3 -3" />
-                                <path d="M18 15l3 -3" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            <form id="logoutForm" method="POST" action="{{ route('admin.auth.logout') }}">
-                                @csrf
-                                Đăng xuất
-                            </form>
-                        </span>
-                    </a>
-                </li>
+                @foreach (Config::get('adminsidebar', []) as $menuItem)
+                    @php
+                        $hasChild = isset($menuItem['child']);
+                        $currentRouteName = request()
+                            ->route()
+                            ->getAction()['as'];
+                        $menuRoute = $menuItem['route'];
+                        $menuName = $menuItem['name'];
+                        $activeParent = str_contains($currentRouteName, $menuRoute);
+                        $menuLink = $menuRoute ? route('admin.' . $menuRoute) : '#';
+
+                        if ($hasChild) {
+                            $currentRouteWithoutPrefix = explode('admin.', $currentRouteName)[1];
+                            $arrChildRoute = array_column($menuItem['child'], 'route');
+                            $activeParent = in_array($currentRouteWithoutPrefix, $arrChildRoute);
+                        }
+                    @endphp
+                    @if ($menuRoute === 'auth.logout')
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)"
+                                onclick="document.getElementById('logoutForm').submit()">
+                                <span class="nav-link-title">
+                                    <form id="logoutForm" method="POST" action="{{ route('admin.auth.logout') }}">
+                                        @csrf
+                                        Đăng xuất
+                                    </form>
+                                </span>
+                            </a>
+                        </li>
+                    @else
+                        <li
+                            class="nav-item @if ($hasChild) dropdown @endif @if ($activeParent) active @endif">
+                            <a class="nav-link @if ($hasChild) dropdown-toggle @endif"
+                                href="{{ $menuLink }}"
+                                @if ($hasChild) data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false" @endif>
+                                <span class="nav-link-title">
+                                    {{ $menuName }}
+                                </span>
+                            </a>
+                            @if ($hasChild)
+                                <div class="dropdown-menu @if ($activeParent) show @endif">
+                                    @foreach ($menuItem['child'] as $menuChildItem)
+                                        @php
+                                            $menuChildRoute = $menuChildItem['route'];
+                                            $menuChildName = $menuChildItem['name'];
+                                            $activeChild = str_contains($currentRouteName, $menuChildRoute);
+                                            $menuChildLink = $menuChildRoute ? route("admin.{$menuChildRoute}") : '#';
+                                        @endphp
+                                        <a class="dropdown-item @if ($activeChild) active @endif"
+                                            href="{{ $menuChildLink }}" rel="noopener">
+                                            {{ $menuChildName }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </li>
+                    @endif
+                @endforeach
             </ul>
         </div>
     </div>

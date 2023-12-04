@@ -49,7 +49,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div>
                             <label class="form-label">Avatar</label>
                             @empty(!$user->image)
                                 <img width="150" class="rounded mb-2" src="/images/admins/{{ $user->image }}"

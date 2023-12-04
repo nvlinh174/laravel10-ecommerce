@@ -14,29 +14,9 @@
                         </svg>
                         Source code
                     </a>
-                    <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank" rel="noreferrer">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                        </svg>
-                        Sponsor
-                    </a>
                 </div>
             </div>
             <div class="d-none d-md-flex">
-                <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
-                    </svg>
-                </a>
                 <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
                     data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
@@ -187,7 +167,6 @@
                     <a href="{{ route('admin.auth.profile') }}" class="dropdown-item">Thông tin tài khoản</a>
                     <a href="{{ route('admin.auth.updatePassword') }}" class="dropdown-item">Cập nhật mật khẩu</a>
                     <div class="dropdown-divider"></div>
-                    <a href="./settings.html" class="dropdown-item">Settings</a>
                     <a href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit()"
                         class="dropdown-item">
                         <form id="logoutForm" method="POST" action="{{ route('admin.auth.logout') }}">

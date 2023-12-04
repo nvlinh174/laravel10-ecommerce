@@ -8,3 +8,8 @@
 .input-password .form-control.is-invalid {
     background-image: none;
 }
+
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--tblr-dropdown-link-active-color)!important;
+    background-color: var(--tblr-dropdown-link-active-bg)!important;
+}
