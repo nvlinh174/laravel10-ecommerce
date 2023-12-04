@@ -179,8 +179,8 @@
                     <span class="avatar avatar-sm"
                         style="background-image: url({{ asset('admin/static/avatars/000m.jpg') }})"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>Paweł Kuna</div>
-                        <div class="mt-1 small text-muted">UI Designer</div>
+                        <div>{{ Auth::guard('admin')->user()->name }}</div>
+                        <div class="mt-1 small text-muted">Developer</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

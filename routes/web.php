@@ -25,13 +25,18 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
         Route::controller(DashboardController::class)->group(function () {
             Route::get('dashboard', 'index')->name('dashboard.index');
         });
+
+        Route::controller(AuthController::class)->group(function () {
+            Route::name('auth.')->group(function () {
+                Route::post('logout', 'logout')->name('logout');
+                Route::match(['get', 'post'], 'update-password', 'updatePassword')->name('updatePassword');
+            });
+        });
     });
 
     Route::controller(AuthController::class)->group(function () {
         Route::name('auth.')->group(function () {
             Route::match(['get', 'post'], 'login', 'login')->name('login');
-            Route::post('logout', 'logout')->name('logout');
         });
-       
     });
 });

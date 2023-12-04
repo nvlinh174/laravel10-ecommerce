@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
                 'name' => 'Van Linh',
                 'type' => 'admin',
                 'phone' => '0336405077',
-                'email' => 'nvlinh17041992@gmail.com',
+                'email' => 'admin@gmail.com',
                 'password' => $password,
                 'image' => '',
                 'status' => 1

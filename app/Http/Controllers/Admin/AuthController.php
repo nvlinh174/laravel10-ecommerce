@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    protected $viewPrefix = 'admin.pages.auth.';
+
     public function login(Request $request)
     {
         if ($request->method() === 'POST') {
@@ -28,5 +30,10 @@ class AuthController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect('/admin/login');
+    }
+
+    public function updatePassword()
+    {
+        return view("{$this->viewPrefix}change-password");
     }
 }
