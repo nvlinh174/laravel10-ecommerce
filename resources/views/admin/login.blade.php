@@ -32,11 +32,33 @@
             <div class="card card-md">
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">Đăng nhập quản trị</h2>
+                    @if (session('error_message'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <div class="d-flex">
+                                <div>
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-circle -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                                        <path d="M12 8v4"></path>
+                                        <path d="M12 16h.01"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    Thông tin đăng nhập không đúng. <br> Vui lòng thử lại!
+                                </div>
+                            </div>
+                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                        </div>
+                    @endif
                     <form action="{{ route('admin.auth.login') }}" method="post" autocomplete="off" novalidate>
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" value="admin@gmail.com" class="form-control" name="email" placeholder="your@email.com" autocomplete="off">
+                            <input type="email" value="admin@gmail.com" class="form-control" name="email"
+                                placeholder="your@email.com" autocomplete="off">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">
@@ -46,11 +68,11 @@
                                 </span>
                             </label>
                             <div class="input-group input-group-flat">
-                                <input type="password" value="123456" name="password" class="form-control" placeholder="Your password"
-                                    autocomplete="off">
+                                <input type="password" value="123456" name="password" class="form-control"
+                                    placeholder="Your password" autocomplete="off">
                                 <span class="input-group-text">
                                     <a href="#" class="link-secondary" title="Show password"
-                                        data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                        data-bs-toggle="tooltip">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
                                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                             fill="none" stroke-linecap="round" stroke-linejoin="round">

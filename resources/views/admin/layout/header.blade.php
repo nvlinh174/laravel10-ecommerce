@@ -184,16 +184,15 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Status</a>
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
-                    <a href="#" class="dropdown-item">Feedback</a>
+                    <a href="#" class="dropdown-item">Thông tin tài khoản</a>
+                    <a href="{{ route('admin.auth.updatePassword') }}" class="dropdown-item">Cập nhật mật khẩu</a>
                     <div class="dropdown-divider"></div>
                     <a href="./settings.html" class="dropdown-item">Settings</a>
                     <a href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit()"
                         class="dropdown-item">
                         <form id="logoutForm" method="POST" action="{{ route('admin.auth.logout') }}">
                             @csrf
-                            Logout
+                            Đăng xuất
                         </form>
                     </a>
                 </div>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\UpdatePasswordRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -35,5 +38,13 @@ class AuthController extends Controller
     public function updatePassword()
     {
         return view("{$this->viewPrefix}change-password");
+    }
+
+    public function postUpdatePassword(UpdatePasswordRequest $request)
+    {
+        $data = $request->validated();
+
+        Admin::where('id', Auth::guard('admin')->user()->id)->update(['password' => bcrypt($data['new_password'])]);
+        return back();
     }
 }

@@ -1,0 +1,10 @@
+.input-password .input-icon-addon {
+    cursor: pointer;
+    pointer-events: all;
+    align-items: start;
+    top: 10px;
+}
+
+.input-password .form-control.is-invalid {
+    background-image: none;
+}

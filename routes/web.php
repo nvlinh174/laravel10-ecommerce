@@ -29,7 +29,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
         Route::controller(AuthController::class)->group(function () {
             Route::name('auth.')->group(function () {
                 Route::post('logout', 'logout')->name('logout');
-                Route::match(['get', 'post'], 'update-password', 'updatePassword')->name('updatePassword');
+                Route::get('update-password', 'updatePassword')->name('updatePassword');
+                Route::post('post-update-password', 'postUpdatePassword')->name('postUpdatePassword');
+                // Route::match(['get', 'post'], 'update-password', 'updatePassword')->name('updatePassword');
             });
         });
     });
