@@ -5,6 +5,10 @@ return [
         'route' => 'dashboard.index'
     ],
     [
+        'name' => 'Quản lý trang',
+        'route' => 'pages.index'
+    ],
+    [
         'name' => 'Tài khoản',
         'route' => false,
         'child' => [

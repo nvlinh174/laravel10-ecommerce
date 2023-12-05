@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +34,15 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
                 Route::post('post-update-password', 'postUpdatePassword')->name('postUpdatePassword');
                 Route::get('profile', 'profile')->name('profile');
                 Route::post('update-profile', 'updateProfile')->name('updateProfile');
-                // Route::match(['get', 'post'], 'update-password', 'updatePassword')->name('updatePassword');
             });
         });
+
+        Route::resource('pages', PageController::class);
+
+        // Route::controller(AuthController::class)->group(function () {
+        //     Route::name('pages.')->group(function () {
+        //     });
+        // });
     });
 
     Route::controller(AuthController::class)->group(function () {

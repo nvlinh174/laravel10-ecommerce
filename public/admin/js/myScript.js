@@ -2,8 +2,6 @@ const passwordToggleIcon = document.querySelectorAll(
     'input[type="password"] + .input-icon-addon'
 );
 
-console.log(passwordToggleIcon);
-
 if (passwordToggleIcon.length > 0) {
     passwordToggleIcon.forEach((element) => {
         element.addEventListener("click", function () {

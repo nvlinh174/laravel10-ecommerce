@@ -15,6 +15,9 @@
     <link href="{{ asset('admin/css/tabler-flags.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/tabler-vendors.min.css') }}" rel="stylesheet" />
+    {{-- Stack Libs CSS --}}
+    @stack('libs_css')
+    {{-- Custom CSS --}}
     <link href="{{ asset('admin/css/myStyle.css') }}" rel="stylesheet" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
