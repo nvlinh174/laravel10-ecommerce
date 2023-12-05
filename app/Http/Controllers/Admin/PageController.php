@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     protected $viewPrefix = 'admin.pages.pages.';
+
+    public function __construct()
+    {
+        view()->share('routeNamePrefix', 'admin.pages.');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +28,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view("{$this->viewPrefix}create");
     }
 
     /**
@@ -47,7 +52,8 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        //
+        $item = $page;
+        return view("{$this->viewPrefix}edit", compact('item'));
     }
 
     /**
@@ -55,7 +61,7 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        //
+        dd($request->all());
     }
 
     /**

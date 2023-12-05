@@ -7,6 +7,7 @@
                 <div class="card-status-top bg-dark"></div>
                 <div class="card-header">
                     <h3 class="card-title">Danh sách trang</h3>
+                    <a href="{{ route("{$routeNamePrefix}create") }}" class="btn btn-success ms-auto">Thêm mới</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -35,7 +36,8 @@
                                             {{ $item->created_at }}
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-outline-warning btn-sm">Sửa</a>
+                                            <a href="{{ route("{$routeNamePrefix}edit", ['page' => $item]) }}"
+                                                class="btn btn-outline-warning btn-sm">Sửa</a>
                                             <button class="btn btn-outline-danger btn-sm">Xóa</button>
                                         </td>
                                     </tr>
