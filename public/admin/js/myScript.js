@@ -17,3 +17,13 @@ if (passwordToggleIcon.length > 0) {
         });
     });
 }
+
+document.addEventListener("click", function (e) {
+    const el = e.target;
+
+    if (el.classList.contains("btnDelete")) {
+        e.preventDefault();
+        if (confirm("Bạn chắc chắn muốn xóa dữ liệu này?"))
+            el.firstElementChild.submit();
+    }
+});

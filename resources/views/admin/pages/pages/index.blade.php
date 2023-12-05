@@ -39,15 +39,14 @@
                                         <td>
                                             <a href="{{ route("{$routeNamePrefix}edit", ['page' => $item]) }}"
                                                 class="btn btn-outline-warning btn-sm">Sửa</a>
-                                            <a href="#" class="btn btn-outline-danger btn-sm"
-                                                onclick="if (confirm('Bạn chắc chắn muốn xóa dữ liệu này?')) this.firstElementChild.submit();">
-                                                <form method="POST"
+                                            <button type="button" class="btn btn-outline-danger btn-sm btnDelete">
+                                                Xóa
+                                                <form method="POST" class="d-none"
                                                     action="{{ route("{$routeNamePrefix}destroy", ['page' => $item]) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    Xóa
                                                 </form>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
