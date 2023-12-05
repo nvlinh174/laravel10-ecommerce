@@ -16,6 +16,7 @@
                                     <th>ID</th>
                                     <th>Tiêu đề</th>
                                     <th>URL</th>
+                                    <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Hành động</th>
                                 </tr>
@@ -27,11 +28,15 @@
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->url }}</td>
                                         <td>
+                                            <livewire:admin.general.switch-status :value="$item->status" model="Page"
+                                                :id="$item->id" />
+                                        </td>
+                                        <td>
                                             {{ $item->created_at }}
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-warning btn-sm">Sửa</a>
-                                            <button class="btn btn-danger btn-sm">Xóa</button>
+                                            <a href="#" class="btn btn-outline-warning btn-sm">Sửa</a>
+                                            <button class="btn btn-outline-danger btn-sm">Xóa</button>
                                         </td>
                                     </tr>
                                 @endforeach
