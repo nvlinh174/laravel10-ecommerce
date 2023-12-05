@@ -63,9 +63,12 @@ class PageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Page $page)
+    public function update(StoreRequest $request, Page $page)
     {
-        dd($request->all());
+        $data = $request->validated();
+
+        Page::where('id', $page->id)->update($data);
+        return redirect()->route("{$this->routeNamePrefix}index")->with('success_message', 'Cập nhật dữ liệu thành công!');
     }
 
     /**
