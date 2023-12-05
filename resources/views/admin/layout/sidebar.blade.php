@@ -181,19 +181,23 @@
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
                     <span class="avatar avatar-sm"
-                        style="background-image: url({{ asset('admin/static/avatars/000m.jpg') }})"></span>
+                        style="background-image: url({{ asset('images/admins/' . Auth::guard('admin')->user()->image) }})"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>Paweł Kuna</div>
-                        <div class="mt-1 small text-muted">UI Designer</div>
+                        <div>{{ Auth::guard('admin')->user()->name }}</div>
+                        <div class="mt-1 small text-muted">Developer</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Status</a>
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
-                    <a href="#" class="dropdown-item">Feedback</a>
+                    <a href="{{ route('admin.auth.profile') }}" class="dropdown-item">Thông tin tài khoản</a>
+                    <a href="{{ route('admin.auth.updatePassword') }}" class="dropdown-item">Cập nhật mật khẩu</a>
                     <div class="dropdown-divider"></div>
-                    <a href="./settings.html" class="dropdown-item">Settings</a>
-                    <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                    <a href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit()"
+                        class="dropdown-item">
+                        <form id="logoutForm" method="POST" action="{{ route('admin.auth.logout') }}">
+                            @csrf
+                            Đăng xuất
+                        </form>
+                    </a>
                 </div>
             </div>
         </div>

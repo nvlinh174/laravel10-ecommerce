@@ -13,24 +13,6 @@
                         <h3 class="card-title">Cập nhật trang</h3>
                     </div>
                     <div class="card-body">
-                        @if (session('success_message'))
-                            <div class="alert alert-success alert-dismissible" role="alert">
-                                <div class="d-flex">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M5 12l5 5l10 -10"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        {{ session('success_message') }}
-                                    </div>
-                                </div>
-                                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-                            </div>
-                        @endif
                         <div class="row">
                             <div class="col-xl-8">
                                 <div class="mb-3">
@@ -75,7 +57,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Meta Keywords</label>
-                                    <input type="text" class="form-control @error('meta_keywords') is-invalid @enderror"
+                                    <input type="text" class="form-control input-tagify @error('meta_keywords') is-invalid @enderror"
                                         name="meta_keywords" value="{{ $item->meta_keywords }}">
                                     @error('meta_keywords')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -95,6 +77,11 @@
     </div>
 @endsection
 
+@push('libs_css')
+    <x-admin.css.tagify />
+@endpush
+
 @push('after_scripts')
-    @include('components.admin.scripts.tinymce-config')
+    <x-admin.scripts.tinymce-config />
+    <x-admin.scripts.tagify />
 @endpush

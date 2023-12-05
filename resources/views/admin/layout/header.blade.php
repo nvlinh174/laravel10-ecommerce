@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-md sticky-top d-print-none">
+<header class="navbar navbar-expand-md sticky-top d-print-none d-none d-lg-block">
     <div class="container-xl">
         <div class="navbar-nav flex-row order-md-last ms-auto">
             <div class="nav-item d-none d-md-flex me-3">

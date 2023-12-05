@@ -39,8 +39,9 @@ class UpdatePasswordRequest extends FormRequest
 
     public function messages()
     {
+        $validationMessages = config('validationmessages');
         return [
-            'required' => ':attribute bắt buộc nhập',
+            'required' => $validationMessages['required'],
             'current_password' => ':attribute không đúng',
             'confirmed' => ':attribute và xác nhận :attribute không trùng khớp'
         ];

@@ -10,6 +10,7 @@
                     <a href="{{ route("{$routeNamePrefix}create") }}" class="btn btn-success ms-auto">Thêm mới</a>
                 </div>
                 <div class="card-body">
+                    <x-admin.alert.success />
                     <div class="table-responsive">
                         <table class="table display" id="tblDatatables">
                             <thead>

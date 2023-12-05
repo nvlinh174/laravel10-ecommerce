@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Page\StoreRequest;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     protected $viewPrefix = 'admin.pages.pages.';
+    protected $routeNamePrefix = 'admin.pages.';
 
     public function __construct()
     {
-        view()->share('routeNamePrefix', 'admin.pages.');
+        view()->share('routeNamePrefix', $this->routeNamePrefix);
     }
     /**
      * Display a listing of the resource.
@@ -34,9 +36,11 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        Page::create($data);
+        return redirect()->route("{$this->routeNamePrefix}index")->with('success_message', 'Thêm dữ liệu thành công!');
     }
 
     /**

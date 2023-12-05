@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Auth;
+namespace App\Http\Requests\Admin\Page;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfileRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,22 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'max:255',
-            'phone' => 'max:255',
-            'image' => $this->image ? 'image' : ''
+            'title' => 'required|max:255',
+            'url' => 'required|max:255',
+            'meta_title' => 'max:255',
+            'meta_description' => 'max:255',
+            'meta_keywords' => 'max:255',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Họ tên',
-            'phone' => 'Số điện thoại',
-            'image' => 'Avatar'
+            'title' => 'Tiêu đề',
+            'url' => 'URL',
+            'meta_title' => 'Meta Title',
+            'meta_description' => 'Meta Description',
+            'meta_keywords' => 'Meta Keywords'
         ];
     }
 
@@ -41,8 +45,8 @@ class UpdateProfileRequest extends FormRequest
     {
         $validationMessages = config('validationmessages');
         return [
+            'required' => $validationMessages['required'],
             'max' => $validationMessages['max'],
-            'image' => $validationMessages['image']
         ];
     }
 }
