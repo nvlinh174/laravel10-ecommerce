@@ -76,6 +76,7 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        $page->delete();
+        return redirect()->route("{$this->routeNamePrefix}index")->with('success_message', 'Xóa dữ liệu thành công!');
     }
 }
