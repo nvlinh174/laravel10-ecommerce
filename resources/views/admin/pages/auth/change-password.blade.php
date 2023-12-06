@@ -13,52 +13,18 @@
                     <div class="card-body">
                         <x-admin.alert.success />
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" disabled
-                                value="{{ Auth::guard('admin')->user()->email }}">
+                            <x-admin.forms.input title="Email" id="email" disabled
+                                value="{{ Auth::guard('admin')->user()->email }}" type="email" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label required">Mật khẩu cũ</label>
-
-                            <div class="input-icon input-password">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name="password">
-                                @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <span class="input-icon-addon">
-                                    <x-admin.icons.password />
-                                </span>
-                            </div>
-
+                            <x-admin.forms.input title="Mật khẩu cũ" required name="password" type="password" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label required">Mật khẩu mới</label>
-                            <div class="input-icon input-password">
-                                <input type="password" class="form-control @error('new_password') is-invalid @enderror"
-                                    name="new_password">
-                                @error('new_password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <span class="input-icon-addon">
-                                    <x-admin.icons.password />
-                                </span>
-                            </div>
+                            <x-admin.forms.input title="Mật khẩu mới" required name="new_password" type="password" />
                         </div>
                         <div>
-                            <label class="form-label required">Nhập lại mật khẩu mới</label>
-                            <div class="input-icon input-password">
-                                <input type="password"
-                                    class="form-control @error('new_password_confirmation') is-invalid @enderror"
-                                    name="new_password_confirmation">
-                                @error('new_password_confirmation')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <span class="input-icon-addon">
-                                    <x-admin.icons.password />
-                                </span>
-                            </div>
-
+                            <x-admin.forms.input title="Nhập lại mật khẩu mới" required name="new_password_confirmation"
+                                type="password" />
                         </div>
                     </div>
                     <div class="card-footer">

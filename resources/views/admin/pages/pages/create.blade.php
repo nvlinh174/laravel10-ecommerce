@@ -14,45 +14,25 @@
                         <div class="row">
                             <div class="col-xl-8">
                                 <div class="mb-3">
-                                    <label class="form-label required">Tiêu đề</label>
-                                    <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                        name="title">
-                                    @error('title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.input title="Tiêu đề" required name="title" type="text" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Nội dung</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="myeditorinstance" name="description"></textarea>
-                                    @error('description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.invalid-feedback name="description" />
                                 </div>
                             </div>
                             <div class="col-xl-4">
-
                                 <div class="mb-3">
-                                    <label class="form-label required">URL</label>
-                                    <input type="text" class="form-control @error('url') is-invalid @enderror"
-                                        name="url">
-                                    @error('url')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.input title="URL" required name="url" type="text" />
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Meta Title</label>
-                                    <input type="text" class="form-control @error('meta_title') is-invalid @enderror"
-                                        name="meta_title">
-                                    @error('meta_title')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.input title="Meta Title" name="meta_title" type="text" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Meta Description</label>
                                     <textarea name="meta_description" rows="6" class="form-control @error('meta_description') is-invalid @enderror"></textarea>
-                                    @error('meta_description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.invalid-feedback name="meta_description" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Meta Keywords</label>
@@ -62,9 +42,7 @@
                                     <input type="text"
                                         class="form-control input-tagify @error('meta_keywords') is-invalid @enderror"
                                         name="meta_keywords">
-                                    @error('meta_keywords')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-admin.forms.invalid-feedback name="meta_keywords" />
                                 </div>
                             </div>
                         </div>

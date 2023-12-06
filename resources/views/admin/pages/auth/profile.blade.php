@@ -13,37 +13,23 @@
                     <div class="card-body">
                         <x-admin.alert.success />
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" disabled value="{{ $user->email }}">
+                            <x-admin.forms.input title="Email" id="email" disabled value="{{ $user->email }}"
+                                type="email" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Họ tên</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                value="{{ $user->name }}">
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <x-admin.forms.input title="Họ tên" name="name" value="{{ $user->name }}" type="text" />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                value="{{ $user->phone }}">
-                            @error('phone')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <x-admin.forms.input title="Số điện thoại" name="phone" value="{{ $user->phone }}"
+                                type="text" />
                         </div>
                         <div>
-                            <label class="form-label">Avatar</label>
+                            <x-admin.forms.input title="Avatar" name="image" type="file" />
                             @empty(!$user->image)
-                                <img width="150" class="rounded mb-2" src="/images/admins/{{ $user->image }}"
+                                <img width="150" class="rounded mt-2" src="/images/admins/{{ $user->image }}"
                                     alt="avatar">
                                 <input type="hidden" value="{{ $user->image }}" name="current_image">
                             @endempty
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"
-                                value="{{ $user->phone }}">
-                            @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                     </div>
                     <div class="card-footer">
