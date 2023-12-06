@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
         });
 
         Route::resource('pages', PageController::class);
+        Route::resource('categories', CategoryController::class);
 
         // Route::controller(AuthController::class)->group(function () {
         //     Route::name('pages.')->group(function () {
