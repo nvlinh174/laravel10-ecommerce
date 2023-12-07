@@ -14,11 +14,19 @@
                         <div class="row">
                             <div class="col-lg-6 col-xl-8">
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Tiêu đề" required name="title" type="text" />
+                                    <x-admin.forms.input title="Tên" required name="name" type="text" />
                                 </div>
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Slug" data-target="title" customClass="slug" required
+                                    <x-admin.forms.input title="Slug" data-target="name" customClass="slug" required
                                         name="slug" type="text" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label required">Danh mục cha</label>
+                                    <select type="text" class="form-select" name="parent_id">
+                                        @foreach ($parents as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name_with_level }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <x-admin.forms.input title="Mô tả" name="description" type="text" />

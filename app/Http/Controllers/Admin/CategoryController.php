@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -20,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view("{$this->viewPrefix}index");
+        $items = Category::withDepth()->defaultOrder()->having('depth', '>', 0)->get();
+        return view("{$this->viewPrefix}index", compact('items'));
     }
 
     /**
@@ -28,7 +30,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view("{$this->viewPrefix}create");
+        $parents = Category::withDepth()->defaultOrder()->get();
+        return view("{$this->viewPrefix}create", compact('parents'));
     }
 
     /**
@@ -36,7 +39,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $node = new Category($data);
+        $node->save();
+        return back();
     }
 
     /**

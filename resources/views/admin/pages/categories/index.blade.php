@@ -16,15 +16,38 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tiêu đề</th>
-                                    <th>URL</th>
+                                    <th>Tên</th>
+                                    <th>Slug</th>
                                     <th>Trạng thái</th>
                                     <th>Ngày tạo</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody class="table-tbody">
-
+                                @foreach ($items as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name_with_level }}</td>
+                                        <td>{{ $item->slug }}</td>
+                                        <td>
+                                            <livewire:admin.general.switch-status :value="$item->status" model="Category"
+                                                :id="$item->id" />
+                                        </td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route("{$routeNamePrefix}edit", ['category' => $item]) }}"
+                                                class="btn btn-outline-warning btn-sm">Sửa</a>
+                                            <button type="button" class="btn btn-outline-danger btn-sm btnDelete">
+                                                Xóa
+                                                <form method="POST" class="d-none"
+                                                    action="{{ route("{$routeNamePrefix}destroy", ['category' => $item]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

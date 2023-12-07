@@ -25,9 +25,14 @@ if (elInputSlug) {
     const target = elInputSlug.dataset.target;
     const elTarget = document.querySelector(`[name="${target}"]`);
     if (elTarget) {
-        elTarget.addEventListener('change', function () {
-            fetch('')
-        })
+        elTarget.addEventListener("change", function () {
+            const value = elTarget.value;
+            fetch(`/utility/generate-slug?value=${value}`)
+                .then((response) => response.json())
+                .then((res) => {
+                    elInputSlug.value = res.slug;
+                });
+        });
     }
 }
 
