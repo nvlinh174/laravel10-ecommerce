@@ -16,6 +16,6 @@ class Category extends Model
 
     public function getNameWithLevelAttribute()
     {
-        return str_repeat('/----', $this->depth) . $this->name;
+        return str_repeat('/----', $this->depth) . ' ' . $this->name;
     }
 }

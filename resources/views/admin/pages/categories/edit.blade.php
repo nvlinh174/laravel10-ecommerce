@@ -3,22 +3,25 @@
 @section('content')
     <div class="row row-cards">
         <div class="col-12">
-            <form action="{{ route("{$routeNamePrefix}store") }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route("{$routeNamePrefix}update", ['category' => $category]) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card">
                     <div class="card-status-top bg-dark"></div>
                     <div class="card-header">
-                        <h3 class="card-title">Thêm mới danh mục</h3>
+                        <h3 class="card-title">Cập nhật danh mục</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-xl-8">
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Tên" required name="name" type="text" />
+                                    <x-admin.forms.input title="Tên" required name="name" type="text"
+                                        value="{{ $category->name }}" />
                                 </div>
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Slug" data-target="name" customClass="slug" required
-                                        name="slug" type="text" />
+                                    <x-admin.forms.input title="Slug" customClass="slug" required name="slug"
+                                        type="text" value="{{ $category->slug }}" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label required">Danh mục cha</label>
@@ -29,7 +32,8 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Mô tả" name="description" type="text" />
+                                    <x-admin.forms.input title="Mô tả" name="description" type="text"
+                                        value="{{ $category->description }}" />
                                 </div>
                                 <div class="mb-3">
                                     <x-admin.forms.input title="Hình ảnh" name="image" type="file" />
@@ -37,11 +41,12 @@
                             </div>
                             <div class="col-lg-6 col-xl-4">
                                 <div class="mb-3">
-                                    <x-admin.forms.input title="Meta Title" name="meta_title" type="text" />
+                                    <x-admin.forms.input title="Meta Title" name="meta_title" type="text"
+                                        value="{{ $category->meta_title }}" />
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Meta Description</label>
-                                    <textarea name="meta_description" rows="6" class="form-control @error('meta_description') is-invalid @enderror"></textarea>
+                                    <textarea name="meta_description" rows="6" class="form-control @error('meta_description') is-invalid @enderror">{{ $category->meta_description }}</textarea>
                                     <x-admin.forms.invalid-feedback name="meta_description" />
                                 </div>
                                 <div class="mb-3">
@@ -51,7 +56,7 @@
                                     </small>
                                     <input type="text"
                                         class="form-control input-tagify @error('meta_keywords') is-invalid @enderror"
-                                        name="meta_keywords">
+                                        name="meta_keywords" value="{{ $category->meta_keywords }}">
                                     <x-admin.forms.invalid-feedback name="meta_keywords" />
                                 </div>
                             </div>

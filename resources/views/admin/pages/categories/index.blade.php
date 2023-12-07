@@ -27,7 +27,7 @@
                                 @foreach ($items as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name_with_level }}</td>
+                                        <td><span class="badge bg-blue text-blue-fg badge-pill">{{$item->depth}}</span> {{ $item->name_with_level }}</td>
                                         <td>{{ $item->slug }}</td>
                                         <td>
                                             <livewire:admin.general.switch-status :value="$item->status" model="Category"

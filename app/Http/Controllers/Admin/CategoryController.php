@@ -57,15 +57,16 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        $parents = Category::withDepth()->whereNotDescendantOf($category)->where('id', '<>', $category->id)->defaultOrder()->get();
+        return view("{$this->viewPrefix}edit", compact('category', 'parents'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
         //
     }
