@@ -9,6 +9,10 @@ return [
         'route' => 'pages.index'
     ],
     [
+        'name' => 'Quản lý danh mục',
+        'route' => 'categories.index'
+    ],
+    [
         'name' => 'Tài khoản',
         'route' => false,
         'child' => [

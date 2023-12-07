@@ -1,3 +1,4 @@
+// Toggle show password
 const passwordToggleIcon = document.querySelectorAll(
     'input[type="password"] + .input-icon-addon'
 );
@@ -16,6 +17,18 @@ if (passwordToggleIcon.length > 0) {
             }
         });
     });
+}
+
+// Generate Slug
+const elInputSlug = document.querySelector(".slug");
+if (elInputSlug) {
+    const target = elInputSlug.dataset.target;
+    const elTarget = document.querySelector(`[name="${target}"]`);
+    if (elTarget) {
+        elTarget.addEventListener('change', function () {
+            fetch('')
+        })
+    }
 }
 
 document.addEventListener("click", function (e) {

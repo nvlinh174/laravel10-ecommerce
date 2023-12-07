@@ -7,12 +7,20 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    protected $viewPrefix = 'admin.pages.categories.';
+    protected $routeNamePrefix = 'admin.categories.';
+
+    public function __construct()
+    {
+        view()->share('routeNamePrefix', $this->routeNamePrefix);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view("{$this->viewPrefix}index");
     }
 
     /**
@@ -20,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("{$this->viewPrefix}create");
     }
 
     /**

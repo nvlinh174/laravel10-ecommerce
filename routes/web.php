@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,17 @@ Route::get('/', function () {
     return view('admin.dashboard');
 });
 
+Route::group(['as' => 'utility.', 'prefix' => 'utility'], function() {
+
+});
+
+Route::controller(UtilityController::class)->group(function () {
+    Route::prefix('utility')->group(function () {
+        Route::name('utility.')->group(function () {
+            Route::get('generate-slug', 'generateSlug')->name('generateSlug');
+        });
+    });
+});
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::middleware(['admin'])->group(function () {
