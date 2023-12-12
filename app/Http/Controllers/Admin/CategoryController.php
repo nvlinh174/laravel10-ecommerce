@@ -25,6 +25,12 @@ class CategoryController extends Controller
         return view("{$this->viewPrefix}index", compact('items'));
     }
 
+    public function indexNested()
+    {
+        $items = Category::withDepth()->defaultOrder()->having('depth', '>', 0)->get()->toTree();
+        return view("{$this->viewPrefix}index-nested", compact('items'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -88,5 +94,12 @@ class CategoryController extends Controller
             $category->down();
         }
         return back();
+    }
+
+    public function rebuildTree(Request $request)
+    {
+        $data = json_decode($request->data, true);
+        $root = Category::find(1);
+        Category::rebuildSubtree($root, $data);
     }
 }

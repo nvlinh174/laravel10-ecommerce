@@ -51,6 +51,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
 
         Route::resource('pages', PageController::class);
         Route::get('categories/{category}/move/{type}', [CategoryController::class, 'move'])->name('categories.move');
+        Route::get('categories/nested', [CategoryController::class, 'indexNested'])->name('categories.nested');
+        Route::post('categories/rebuildTree', [CategoryController::class, 'rebuildTree'])->name('categories.rebuildTree');
         Route::resource('categories', CategoryController::class);
 
         // Route::controller(AuthController::class)->group(function () {

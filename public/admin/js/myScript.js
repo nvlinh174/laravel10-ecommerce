@@ -45,3 +45,48 @@ document.addEventListener("click", function (e) {
             el.firstElementChild.submit();
     }
 });
+
+const elNestedSortable = document.getElementById("nested-sortable");
+if (elNestedSortable) {
+    const nestedSortables = document.querySelectorAll(".nested-sortable");
+    const sortables = [];
+    for (let i = 0; i < nestedSortables.length; i++) {
+        sortables[i] = new Sortable(nestedSortables[i], {
+            group: "nested",
+            animation: 150,
+            fallbackOnBody: true,
+            swapThreshold: 0.65,
+            dataIdAttr: "data-id",
+            onEnd: function (evt) {
+                const items = elNestedSortable.children;
+
+                const mappingData = (item) => {
+                    const elChildsWrapper =
+                        item.querySelector(".nested-sortable");
+                    const children = Array.from(elChildsWrapper.children).map(
+                        mappingData
+                    );
+                    const id = parseInt(item.dataset.id);
+                    return { id, children };
+                };
+
+                const tree = Array.from(items).map(mappingData);
+                const jsonTree = JSON.stringify(tree);
+                const token = document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content");
+
+                fetch(`/admin/categories/rebuildTree`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": token,
+                    },
+                    body: JSON.stringify({ data: jsonTree }),
+                }).then((response) => response.json());
+
+                console.log(tree);
+            },
+        });
+    }
+}
