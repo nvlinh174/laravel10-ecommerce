@@ -22,8 +22,7 @@ Route::get('/', function () {
     return view('admin.dashboard');
 });
 
-Route::group(['as' => 'utility.', 'prefix' => 'utility'], function() {
-
+Route::group(['as' => 'utility.', 'prefix' => 'utility'], function () {
 });
 
 Route::controller(UtilityController::class)->group(function () {
@@ -51,6 +50,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
         });
 
         Route::resource('pages', PageController::class);
+        Route::get('categories/{category}/move/{type}', [CategoryController::class, 'move'])->name('categories.move');
         Route::resource('categories', CategoryController::class);
 
         // Route::controller(AuthController::class)->group(function () {

@@ -74,8 +74,18 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
         //
+    }
+
+    public function move(Category $category, $type)
+    {
+        if ($type === 'up') {
+            $category->up();
+        } elseif ($type === 'down') {
+            $category->down();
+        }
+        return back();
     }
 }
